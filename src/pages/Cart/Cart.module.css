@@ -1,0 +1,57 @@
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.loadingMessage {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.cardImage {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cardName {
+  font-size: 18px;
+  font-weight: bold;
+  flex: 1;
+}
+
+.cartButton {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.cartButton:last-child {
+  margin-right: 15px;
+}
+
+.cardPrice {
+  font-size: 16px;
+  color: #888;
+}
+
+.totalPrice {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}

@@ -1,0 +1,21 @@
+.mainCategories {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sorting {
+  width: 165px;
+}
+
+.categories {
+  display: flex;
+}
+
+.category {
+  margin-right: 20px;
+}
+
+.category:last-child {
+  margin-bottom: 0;
+}

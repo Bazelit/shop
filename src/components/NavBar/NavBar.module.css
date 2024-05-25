@@ -1,0 +1,32 @@
+nav {
+  padding-top: 70px;
+}
+
+header {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  width: 45px;
+  margin-right: 15px;
+}
+
+.logoTitle {
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.logoSubtitle {
+  font-size: 18px;
+  color: rgb(78, 78, 78);
+}
+
+.cart {
+  display: flex;
+}
