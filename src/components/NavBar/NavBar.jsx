@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import styles from "./NavBar.module.css";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContextComp";
 import {
@@ -9,6 +8,10 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
+
+import styles from "./NavBar.module.css";
+import ThemeSwitcher from "../theme/ThemeSwitcher";
+
 
 const NavBar = () => {
   const { totalPrice } = useContext(CartContext);
@@ -27,6 +30,9 @@ const NavBar = () => {
         </NavLink>
       </NavbarBrand>
       <NavbarContent justify="end">
+        <NavbarItem>
+          <ThemeSwitcher />
+        </NavbarItem>
         <NavbarItem>
           <NavLink className="cartLink" to="cart">
             <div className={styles.headerPrice}>{totalPrice}</div>

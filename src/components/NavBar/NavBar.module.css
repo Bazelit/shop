@@ -4,7 +4,6 @@ nav {
 
 header {
   padding-bottom: 30px;
-  border-bottom: 1px solid #f6f6f6;
 }
 
 .logo {
@@ -24,7 +23,6 @@ header {
 
 .logoSubtitle {
   font-size: 18px;
-  color: rgb(78, 78, 78);
 }
 
 .cart {

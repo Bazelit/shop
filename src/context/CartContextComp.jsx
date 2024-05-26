@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext } from "react";
 import axios from "axios";
+import { useDisclosure } from "@nextui-org/react";
 
 export const CartContext = createContext();
 
@@ -7,25 +8,32 @@ const CartContextComp = ({ children }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get("https://6650eb2d20f4f4c4427682d2.mockapi.io/cart")
-      .then((response) => {
-        setCartProducts(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, [cartProducts]);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const removeCartItem = (id) => {
+  const fetchCartProducts = async () => {
+    setIsLoading(true);
     try {
-      axios.delete(`https://6650eb2d20f4f4c4427682d2.mockapi.io/cart/${id}`);
-      setCartProducts((prev) =>
-        prev.filter((item) => Number(item.id) !== Number(id))
+      const response = await axios.get(
+        "https://6650eb2d20f4f4c4427682d2.mockapi.io/cart"
       );
+      setCartProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartProducts();
+  }, []);
+
+  const removeCartItem = async (id) => {
+    try {
+      await axios.delete(
+        `https://6650eb2d20f4f4c4427682d2.mockapi.io/cart/${id}`
+      );
+      fetchCartProducts(); // Обновление корзины после удаления товара
     } catch (error) {
       alert("Ошибка при удалении из корзины");
       console.error(error);
@@ -41,7 +49,7 @@ const CartContextComp = ({ children }) => {
           )
         )
       );
-      setCartProducts([]);
+      setCartProducts([]); // Очистка состояния корзины
     } catch (error) {
       alert("Ошибка при очистке корзины");
       console.error(error);
@@ -55,7 +63,17 @@ const CartContextComp = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartProducts, removeCartItem, clearCart, totalPrice, isLoading }}
+      value={{
+        cartProducts,
+        fetchCartProducts,
+        removeCartItem,
+        clearCart,
+        totalPrice,
+        isLoading,
+        isOpen,
+        onOpen,
+        onOpenChange,
+      }}
     >
       {children}
     </CartContext.Provider>

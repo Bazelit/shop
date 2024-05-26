@@ -1,11 +1,14 @@
 .mainCategories {
   padding-top: 30px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 30px;
+  border-top: 1px solid #38383818;
 }
 
-.sorting {
-  width: 165px;
+.searchInput {
+  max-width: 260px;
 }
 
 .categories {

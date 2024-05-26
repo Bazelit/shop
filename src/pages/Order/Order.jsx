@@ -1,24 +1,24 @@
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import styles from "./EmptyCart.module.css";
+import styles from "./Order.module.css";
 
-const EmptyCart = () => {
+const Order = () => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
-      <p className={styles.heading}>Корзина пуста😕</p>
-      <p className={styles.message}>
-        Добавьте хотя бы одну вещь, чтобы сделать заказ
-      </p>
       <img
         className={styles.image}
-        src="../public/empty-cart.svg"
-        alt="Empty cart"
+        src="../public/complete-order.jpg"
+        alt="Order completed"
       />
+      <p className={styles.heading}>Ваш заказ успешно оформлен</p>
+      <p className={styles.message}>
+        В ближайшее время с вами свяжется менеджер
+      </p>
       <Button
-        variant="flat"
         className={styles.button}
+        variant="flat"
         onClick={() => navigate("/")}
         color="primary"
       >
@@ -28,4 +28,4 @@ const EmptyCart = () => {
   );
 };
 
-export default EmptyCart;
+export default Order;

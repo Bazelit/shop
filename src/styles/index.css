@@ -37,3 +37,15 @@ main {
 .cartLink.active {
   background: #006fee;
 }
+
+.cardSize {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  margin-right: 5px;
+  border-radius: 6px;
+  color: #333;
+}
+
+.cardSize.active {
+  background-color: #e74c3c;
+}

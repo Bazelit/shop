@@ -1,20 +1,37 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContextComp";
-import { Button, Tooltip } from "@nextui-org/react";
+import { Button, Spinner, Tooltip } from "@nextui-org/react";
 import { GoTrash } from "react-icons/go";
 import { MdClose } from "react-icons/md";
 
 import styles from "./Cart.module.css";
 import EmptyCart from "../../components/EmptyCart/EmptyCart";
+import ModalWindow from "../../components/ModalWindow";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartProducts, removeCartItem, clearCart, totalPrice, isLoading } =
-    useContext(CartContext);
+  const {
+    cartProducts,
+    clearCart,
+    removeCartItem,
+    totalPrice,
+    isLoading,
+    onOpen,
+  } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const placeAnOrder = () => {
+    clearCart();
+    navigate("/order");
+  };
 
   return (
     <div className={styles.cartContainer}>
       {isLoading ? (
-        <h1 className={styles.loadingMessage}>Загрузка...</h1>
+        <>
+          <Spinner />
+          <h1 className={styles.loadingMessage}>Загрузка...</h1>
+        </>
       ) : (
         <>
           {cartProducts.length === 0 ? (
@@ -54,7 +71,7 @@ const Cart = () => {
                   <Button
                     onClick={() => removeCartItem(product.id)}
                     isIconOnly
-                    color="default"
+                    variant="light"
                     size="sm"
                   >
                     <MdClose size={18} />
@@ -62,13 +79,23 @@ const Cart = () => {
                 </div>
               ))}
               <p className={styles.totalPrice}>Общая сумма: {totalPrice}₽</p>
+              <Button
+                className={styles.orderButton}
+                size="lg"
+                onClick={placeAnOrder}
+                color="success"
+                variant="shadow"
+              >
+                Оформить заказ
+              </Button>
+              <ModalWindow />
               <Tooltip
-                color="danger"
+                // color="danger"
                 placement="bottom"
                 showArrow={true}
                 content="Очистить корзину"
               >
-                <Button isIconOnly onClick={clearCart} color="danger">
+                <Button isIconOnly onPress={onOpen} color="danger">
                   <GoTrash size={24} />
                 </Button>
               </Tooltip>

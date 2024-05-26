@@ -5,21 +5,26 @@ import Layout from "./layouts/Layout";
 import PrivateRoute from "./utils/router/PrivateRoute";
 import AuthRootComponent from "./pages/auth/AuthRootComponent";
 import CartContextComp from "./context/CartContextComp";
+import CategoryContextProvider from "./context/CategoryContext";
+import Order from "./pages/Order/Order";
 
 const App = () => {
   return (
-    <CartContextComp>
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="cart" element={<Cart />} />
+    <CategoryContextProvider>
+      <CartContextComp>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="order" element={<Order />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path="login" element={<AuthRootComponent />} />
-        <Route path="register" element={<AuthRootComponent />} />
-      </Routes>
-    </CartContextComp>
+          <Route path="login" element={<AuthRootComponent />} />
+          <Route path="register" element={<AuthRootComponent />} />
+        </Routes>
+      </CartContextComp>
+    </CategoryContextProvider>
   );
 };
 
