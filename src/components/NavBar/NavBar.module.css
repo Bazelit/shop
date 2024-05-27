@@ -28,3 +28,21 @@ header {
 .cart {
   display: flex;
 }
+
+@media (max-width: 605px) {
+  nav {
+    padding-top: 40px;
+  }
+
+  .logoTitle {
+    font-size: 24px;
+  }
+
+  .logoSubtitle {
+    display: none;
+  }
+
+  .themeSwitch {
+    display: none;
+  }
+}

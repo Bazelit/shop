@@ -12,7 +12,6 @@ import {
 import styles from "./NavBar.module.css";
 import ThemeSwitcher from "../theme/ThemeSwitcher";
 
-
 const NavBar = () => {
   const { totalPrice } = useContext(CartContext);
 
@@ -30,7 +29,7 @@ const NavBar = () => {
         </NavLink>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className={styles.themeSwitch}>
           <ThemeSwitcher />
         </NavbarItem>
         <NavbarItem>

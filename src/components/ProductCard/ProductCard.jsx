@@ -5,6 +5,7 @@ import { Button, Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import CardSceleton from "../CardSceleton";
 import { CartContext } from "../../context/CartContextComp";
 import { CategoryContext } from "../../context/CategoryContext";
+import { SearchContextValue } from "../../context/SearchContext";
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,7 @@ const ProductCard = () => {
   const [productSize, setProductSize] = useState(0);
   const { fetchCartProducts } = useContext(CartContext);
   const { selectedCategory } = useContext(CategoryContext);
+  const { searchValue } = useContext(SearchContextValue);
 
   useEffect(() => {
     axios
@@ -45,13 +47,18 @@ const ProductCard = () => {
       ? products
       : products.filter((product) => product.category === selectedCategory);
 
+  // Поиск по имени
+  const filteredProductsByName = filteredProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <div className={styles.cards}>
       {isLoading ? (
         <CardSceleton />
       ) : (
         <>
-          {filteredProducts.map((product) => (
+          {filteredProductsByName.map((product) => (
             <Card key={product.id} className={styles.card}>
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                 <Image
@@ -86,35 +93,6 @@ const ProductCard = () => {
                 </Button>
               </CardBody>
             </Card>
-            // <div key={product.id} className={styles.card}>
-            //   <img
-            //     className={styles.cardImage}
-            //     src={product.imageUrl}
-            //     alt={product.name}
-            //   />
-            //   <div className={styles.cardName}>{product.name}</div>
-            //   <div className={styles.cardSizes}>
-            //     {product.sizes.map((size, index) => (
-            //       <Button
-            //         size="sm"
-            //         isIconOnly
-            //         className={styles.cardSize}
-            //         key={index}
-            //         onClick={() => setProductSize(index)}
-            //         color={productSize === index ? "primary" : "default"}
-            //       >
-            //         {size}
-            //       </Button>
-            //     ))}
-            //   </div>
-            //   <div className={styles.cardPrice}>{product.price}₽</div>
-            //   <Button
-            //     onClick={() => addToCart(product)}
-            //     className={styles.cardButton}
-            //   >
-            //     В корзину
-            //   </Button>
-            // </div>
           ))}
         </>
       )}

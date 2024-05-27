@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { CategoryContext } from "../../context/CategoryContext";
 import styles from "./Categories.module.css";
 import { CiSearch } from "react-icons/ci";
+import { SearchContextValue } from "../../context/SearchContext";
 
 const Categories = () => {
   const { selectedCategory, setSelectedCategory } = useContext(CategoryContext);
+  const { searchValue, setSearchValue } = useContext(SearchContextValue);
 
   const categories = [
     { name: "Все", id: 0 },
@@ -38,6 +40,8 @@ const Categories = () => {
       </div>
       <div className={styles.searchInput}>
         <Input
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
           label="Поиск"
           startContent={<CiSearch />}
           placeholder="Введите для поиска..."

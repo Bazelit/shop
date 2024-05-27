@@ -19,21 +19,19 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div>
-      <Switch
-        checked={theme === "dark"}
-        size="lg"
-        color="secondary"
-        onChange={handleThemeChange}
-        thumbIcon={({ isSelected, className }) =>
-          isSelected ? (
-            <SunIcon className={className} />
-          ) : (
-            <MoonIcon className={className} />
-          )
-        }
-      />
-    </div>
+    <Switch
+      checked={theme === "dark"}
+      size="lg"
+      color="secondary"
+      onChange={handleThemeChange}
+      thumbIcon={({ isSelected, className }) =>
+        isSelected ? (
+          <SunIcon className={className} />
+        ) : (
+          <MoonIcon className={className} />
+        )
+      }
+    />
   );
 };
 
